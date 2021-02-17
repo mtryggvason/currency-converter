@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CurrencyConverter } from './components/currencyConverter';
+import { CurrencyFilter } from './components/currencyFilter';
 import { RawCurrencyData } from './types';
 import Currency from './classes/currency';
 
@@ -47,7 +47,7 @@ function App ({fetchData}: AppProps) {
           </h1> 
         </div>
       </header>
-        {currencies.length > 0 && <CurrencyConverter searchTerm={window.location.hash.replace('#', '')} fx={currencies} />}
+        {currencies.length > 0 && <CurrencyFilter searchTerm={window.location.hash.replace('#', '')} fx={currencies} />}
         {loading && <div className="fixed-center">Loading</div>}
         {error && <div>Stuff Went bananas - it's not you, its us.</div>}
     </>
