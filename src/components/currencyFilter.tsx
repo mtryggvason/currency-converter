@@ -8,7 +8,7 @@ import { CurrencyTable } from './currencyTable';
 
 
 type CurrencyFilterProps = {
-  fx: Array<Currency>,
+  data: Array<Currency>,
   matchers: Array<Function>
   searchTerm: string
 }
@@ -26,8 +26,8 @@ export function CurrencyFilter(props: CurrencyFilterProps) {
     const [searchTerm, setSearchTerm] = useState(props.searchTerm);
     const [inputValue, setInputValue] = useState(props.searchTerm);
     const results = useMemo(() => {
-        return searchObjects(props.fx, props.matchers.map(matcher => matcher(searchTerm))) as Array<Currency>;
-    }, [searchTerm]);
+        return searchObjects(props.data, props.matchers.map(matcher => matcher(searchTerm))) as Array<Currency>;
+    }, [props.data, props.matchers, searchTerm ]);
 
     // Offer possibility for debouncing incase the currency list gets huge. 
     const debouncedSetValue = useCallback(debounce((value: string) => setSearchTerm(value), 0),[]);
@@ -46,7 +46,7 @@ export function CurrencyFilter(props: CurrencyFilterProps) {
                 </div>
             </div>
             <div className="container">
-                <CurrencyTable fx={results} />
+                <CurrencyTable data={results} />
             </div>
         </>
     );

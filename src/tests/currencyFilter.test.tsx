@@ -10,7 +10,7 @@ describe('Currency Converter Component', () => {
     const mockMatcher = () => {
         return mock
     }
-    render(<CurrencyFilter matchers={[mockMatcher]} fx={testCurrencies}/>);
+    render(<CurrencyFilter matchers={[mockMatcher]} data={testCurrencies}/>);
     expect(mock).toBeCalled()
   });
 
@@ -19,7 +19,7 @@ describe('Currency Converter Component', () => {
       const mockMatcher = () => {
         return jest.fn(() => true);
       }
-      render(<CurrencyFilter matchers={[mockMatcher]} fx={testCurrencies}/>);
+      render(<CurrencyFilter matchers={[mockMatcher]} data={testCurrencies}/>);
       const euroElement = screen.queryAllByText(/Euro/i);
       expect(euroElement.length).toEqual(1)
   });
@@ -29,13 +29,13 @@ describe('Currency Converter Component', () => {
       const mockMatcher = () => {
         return jest.fn(() => false);
       }
-      render(<CurrencyFilter matchers={[mockMatcher]} fx={testCurrencies}/>);
+      render(<CurrencyFilter matchers={[mockMatcher]} data={testCurrencies}/>);
       const euroElement = screen.queryAllByText(/Euro/i);
       expect(euroElement.length).toEqual(0)
   });
 
   it('should filter based on searchTerm assuming not other matchers are provided', () => {
-      render(<CurrencyFilter fx={testCurrencies} searchTerm="USD" />);
+      render(<CurrencyFilter data={testCurrencies} searchTerm="USD" />);
       const euroElements = screen.queryAllByText(/Euro/i);
       const dollarElements = screen.queryAllByText(/USD/i);
 
@@ -45,7 +45,7 @@ describe('Currency Converter Component', () => {
 
 
   it('should not filter with empty string', () => {
-      render(<CurrencyFilter fx={testCurrencies} searchTerm="" />);
+      render(<CurrencyFilter data={testCurrencies} searchTerm="" />);
       const euroElements = screen.queryAllByText(/Euro/i);
       const dollarElements = screen.queryAllByText(/USD/i);
 
@@ -54,7 +54,7 @@ describe('Currency Converter Component', () => {
   });
 
     it('changing input should rerender the table', async () => {
-      render(<CurrencyFilter fx={testCurrencies} searchTerm="" />);
+      render(<CurrencyFilter data={testCurrencies} searchTerm="" />);
       let euroElements = screen.queryAllByText(/Euro/i);
       let dollarElements = screen.queryAllByText(/USD/i);
 

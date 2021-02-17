@@ -4,7 +4,7 @@ import  Currency from '../classes/currency';
 
 
 type CurrencyTabelProps = {
-  fx: Array<Currency>,
+  data: Array<Currency>,
 }
 
 export function CurrencyTable(props: CurrencyTabelProps) {
@@ -20,7 +20,7 @@ export function CurrencyTable(props: CurrencyTabelProps) {
                 </tr>
             </thead>
             <tbody>
-                {props.fx.map((item: Currency) => {
+                {props.data.map((item: Currency) => {
                     return (<tr key={item.currency}>
                         <td>{item.currency}</td>
                         <td>
